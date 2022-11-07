@@ -9,7 +9,6 @@ liblzma.so.5
 libm.so.6
 libncurses.so.6
 libomp.so
-libomptarget.so
 libpanel.so.6
 libpython3.11.so.1.0
 libstdc++.so.6

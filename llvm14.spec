@@ -7,7 +7,7 @@
 %define keepstatic 1
 Name     : llvm14
 Version  : 14.0.6
-Release  : 160
+Release  : 162
 URL      : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source0  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source1  : https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/sdk-1.3.211.0.tar.gz
@@ -225,7 +225,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667598537
+export SOURCE_DATE_EPOCH=1667847912
 unset LD_AS_NEEDED
 pushd llvm
 mkdir -p clr-build
@@ -275,7 +275,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1667598537
+export SOURCE_DATE_EPOCH=1667847912
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/llvm14
 cp %{_builddir}/SPIRV-Headers-sdk-1.3.211.0/LICENSE %{buildroot}/usr/share/package-licenses/llvm14/9a84200f47e09abfbde1a6b25028460451b23d03
@@ -334,6 +334,9 @@ rm -f %{buildroot}/usr/lib/libomptarget.rtl.amdgpu.so
 # Rename the Gold plugin elsewhere, as we're erasing *.so below
 mv %{buildroot}/usr/lib64/LLVMgold.so %{buildroot}/usr/lib64/LLVMgold.so.save
 
+# Rename the libomptarget elsewhere, as we're erasing *.so below
+mv %{buildroot}/usr/lib64/libomptarget.so %{buildroot}/usr/lib64/libomptarget.so.save
+
 # Remove files that should come from the main llvm package
 rm -rf %{buildroot}/usr/include
 rm -fr %{buildroot}/usr/lib/libear
@@ -370,6 +373,10 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 # Put the LLVM gold plugin back, under the versioned name
 mv lib64/LLVMgold.so.save lib64/LLVMgold-$VERSION.so
+
+# Put the libomptarget.so back, under the versioned name
+mv lib64/libomptarget.so.save lib64/libomptarget-$VERSION.so
+
 mkdir -p lib/bfd-plugins
 ln -s ../../lib64/LLVMgold-$VERSION.so lib/bfd-plugins
 popd
@@ -915,6 +922,7 @@ popd
 /usr/lib64/clang/14.0.6/include/xsaveoptintrin.h
 /usr/lib64/clang/14.0.6/include/xsavesintrin.h
 /usr/lib64/clang/14.0.6/include/xtestintrin.h
+/usr/lib64/libomptarget-14.so
 
 %files extras-libclang
 %defattr(-,root,root,-)
