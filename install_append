@@ -1,13 +1,6 @@
 # -*- sh -*-
-# remove libomptarget.rtl.amdgpu.so for now
-# it is built using rpath and wants to be in the wrong path
-rm -f %{buildroot}/usr/lib/libomptarget.rtl.amdgpu.so
-
 # Rename the Gold plugin elsewhere, as we're erasing *.so below
 mv %{buildroot}/usr/lib64/LLVMgold.so %{buildroot}/usr/lib64/LLVMgold.so.save
-
-# Rename the libomptarget elsewhere, as we're erasing *.so below (shouldn't be needed for v15)
-mv %{buildroot}/usr/lib64/libomptarget.so %{buildroot}/usr/lib64/libomptarget.so.save
 
 # Remove files that should come from the main llvm package
 rm -rf %{buildroot}/usr/include
@@ -45,9 +38,6 @@ ln -s ../.. lib64/clang/$FULL_VERSION/lib64
 
 # Put the LLVM gold plugin back, under the versioned name
 mv lib64/LLVMgold.so.save lib64/LLVMgold-$VERSION.so
-
-# Put the libomptarget.so back, under the versioned name
-mv lib64/libomptarget.so.save lib64/libomptarget-$VERSION.so
 
 mkdir -p lib/bfd-plugins
 ln -s ../../lib64/LLVMgold-$VERSION.so lib/bfd-plugins
