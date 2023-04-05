@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : llvm14
 Version  : 14.0.6
-Release  : 164
+Release  : 165
 URL      : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source0  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source1  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz.sig
@@ -51,9 +51,6 @@ BuildRequires : rsync
 BuildRequires : swig
 BuildRequires : valgrind-dev
 BuildRequires : zlib-dev
-# Suppress stripping binaries
-%define __strip /bin/true
-%define debug_package %{nil}
 Patch1: llvm-0001-Improve-physical-core-count-detection.patch
 Patch2: llvm-0002-Produce-a-normally-versioned-libLLVM.patch
 Patch3: llvm-0003-Allow-one-more-FMA-fusion.patch
@@ -164,7 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680659138
+export SOURCE_DATE_EPOCH=1680708659
 unset LD_AS_NEEDED
 pushd llvm
 mkdir -p clr-build
@@ -214,7 +211,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680659138
+export SOURCE_DATE_EPOCH=1680708659
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/llvm14
 cp %{_builddir}/llvm-project-%{version}.src/bolt/LICENSE.TXT %{buildroot}/usr/share/package-licenses/llvm14/af07f365643f841c69797e9059b66f0bd847f1cd || :
