@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : llvm14
 Version  : 14.0.6
-Release  : 165
+Release  : 166
 URL      : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source0  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source1  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz.sig
@@ -108,16 +108,16 @@ license components for the llvm14 package.
 %prep
 %setup -q -n llvm-project-14.0.6.src
 cd %{_builddir}/llvm-project-14.0.6.src
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
+%patch -P 4 -p1
+%patch -P 5 -p1
+%patch -P 6 -p1
+%patch -P 7 -p1
+%patch -P 8 -p1
+%patch -P 9 -p1
+%patch -P 10 -p1
 
 %build
 ## build_prepend_once content
@@ -161,7 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680708659
+export SOURCE_DATE_EPOCH=1689815784
 unset LD_AS_NEEDED
 pushd llvm
 mkdir -p clr-build
@@ -211,7 +211,7 @@ popd
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680708659
+export SOURCE_DATE_EPOCH=1689815784
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/llvm14
 cp %{_builddir}/llvm-project-%{version}.src/bolt/LICENSE.TXT %{buildroot}/usr/share/package-licenses/llvm14/af07f365643f841c69797e9059b66f0bd847f1cd || :
