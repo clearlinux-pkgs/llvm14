@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : llvm14
 Version  : 14.0.6
-Release  : 166
+Release  : 167
 URL      : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source0  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz
 Source1  : https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.6/llvm-project-14.0.6.src.tar.xz.sig
